@@ -1,42 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int euclids_gcd(int m,int n)
 {
-    int array[100],i,max,min,size,pos1,pos2;
-    printf("Enter the size\n");
-    scanf("%d",&size);
+    int r;
 
-    printf("Enter the elements\n");
-    for(i=0;i<size;i++)
+    while(n!=0){
+        r=m%n;
+        m=n;
+        n=r;
+    }
+    return m;
+
+}
+
+int consecutive_integer(int m,int n)
+{
+    int t;
+    if(m==0)
+        return n;
+    if(n==0)
+        return m;
+    if(m>n)
+        t=n;
+    else
+        t=m;
+    while(t!=0)
     {
-        scanf("%d",&array[i]);
+        if(m%t==0)
+        {
+            if(n%t==0)
+            {
+                return t;
+            }
+        }
+        t--;
     }
 
-    max=array[0];
-    min=array[0];
+}
 
-    for(i=1;i<size;i++)
+int main(){
+    int m,n,res,ch;
+    printf("Enter 2 numbers:\n");
+    scanf("%d %d",&m,&n);
+    printf("Enter your choice:\n1.Euclids 2.Consecutive integer\n");
+    scanf("%d",&ch);
+    switch(ch)
     {
-        //if the current element is greater than max
-        if(array[i]>max)
-        {
-            max=array[i];
-            pos1=i+1;
-        }
-        //if the current element is smaller than min
-        if(array[i]<min)
-        {
-            min=array[i];
-            pos2=i+1;
-        }
+    case 1:
+        res=euclids_gcd(m,n);
+        printf("The gcd of given input is %d",res);
+        break;
+    case 2:
+        res=consecutive_integer(m,n);
+        printf("Gcd is %d",res);
+        break;
     }
-    printf("The maximum element is %d at position %d\n",max,pos1);
-    printf("The minimum element is %d at position %d\n",min,pos2);
-
-
 
     return 0;
 }
-
-
