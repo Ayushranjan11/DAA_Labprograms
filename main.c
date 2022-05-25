@@ -1,61 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int euclids_gcd(int m,int n)
+int main()
 {
-    int r;
+    int a[100],i,key,n;
+    printf("Enter the size of the array\n");
+    scanf("%d",&n);
+    printf("Elements\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    printf("Key\n");
+    scanf("%d",&key);
+    i=0;
 
-    while(n!=0){
-        r=m%n;
-        m=n;
-        n=r;
-    }
-    return m;
+    //double clock_tstart=clock();
+    while(a[i]!=key)
+        i++;
 
-}
-
-int consecutive_integer(int m,int n)
-{
-    int t;
-    if(m==0)
-        return n;
-    if(n==0)
-        return m;
-    if(m>n)
-        t=n;
+    //double clock_tend=clock();
+    //double time=(en__start)/(double) CLOCK S_PER_SEC;
+   // printf("Execution time: %lf seconds\n",time);
+    if(i<n)
+        printf("%d found at the position %d\n",key,i+1);
     else
-        t=m;
-    while(t!=0)
-    {
-        if(m%t==0)
-        {
-            if(n%t==0)
-            {
-                return t;
-            }
-        }
-        t--;
-    }
-
-}
-
-int main(){
-    int m,n,res,ch;
-    printf("Enter 2 numbers:\n");
-    scanf("%d %d",&m,&n);
-    printf("Enter your choice:\n1.Euclids 2.Consecutive integer\n");
-    scanf("%d",&ch);
-    switch(ch)
-    {
-    case 1:
-        res=euclids_gcd(m,n);
-        printf("The gcd of given input is %d",res);
-        break;
-    case 2:
-        res=consecutive_integer(m,n);
-        printf("Gcd is %d",res);
-        break;
-    }
-
+        printf("%d is not found\n",key);
     return 0;
 }
