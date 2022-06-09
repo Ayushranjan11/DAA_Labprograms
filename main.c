@@ -1,28 +1,59 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int max(int,int);
+void warshall(int p[5][5],int n)
 {
-    int a[100],i,key,n;
-    printf("Enter the size of the array\n");
-    scanf("%d",&n);
-    printf("Elements\n");
-    for(i=0;i<n;i++)
-        scanf("%d",&a[i]);
-    printf("Key\n");
-    scanf("%d",&key);
-    i=0;
+    int i,j,k;
+    for(k=1;k<=n;k++)
+        for(i=1;i<=n;i++)
+            for(j=1;j<=n;j++)
+               p[i][j]=max(p[i][j],p[i][k]&&p[k][j]);
+}
 
-    //double clock_tstart=clock();
-    while(a[i]!=key)
-        i++;
-
-    //double clock_tend=clock();
-    //double time=(en__start)/(double) CLOCK S_PER_SEC;
-   // printf("Execution time: %lf seconds\n",time);
-    if(i<n)
-        printf("%d found at the position %d\n",key,i+1);
+int max(int a,int b)
+{
+    if(a>b)
+        return (a);
     else
-        printf("%d is not found\n",key);
-    return 0;
+        return (b);
+}
+
+
+
+
+
+
+
+void main()
+{
+    int p[5][5]={0};
+    int n,e,u,v,i,j;
+    printf("Enter the number of vertices\n");
+    scanf("%d",&n);
+    printf("Enter the number of edges\n");
+    scanf("%d",&e);
+    for(i=1;i<=e;i++)
+    {
+        printf("\n Enter the end vertices of edge %d:",i);
+		scanf("%d%d",&u,&v);
+		p[u][v]=1;
+    }
+    printf("\n Matrix of input data: \n");
+	for (i=1;i<=n;i++) {
+		for (j=1;j<=n;j++)
+		   printf("%d\t",p[i][j]);
+		printf("\n");
+	}
+	warshall(p,n);
+	printf("\n Transitive closure: \n");
+	for (i=1;i<=n;i++) {
+		for (j=1;j<=n;j++)
+		   printf("%d\t",p[i][j]);
+		printf("\n");
+	}
+
+
+
+
 }
